@@ -1,0 +1,13 @@
+{
+  "name": "subc",
+  "version": "1.0.0",
+  "description": "Convert subscribes to clash config",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  },
+  "dependencies": {
+    "yaml": "^2.2.1"
+  }
+}
