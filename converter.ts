@@ -42,7 +42,7 @@ interface proxy {
 const base64ToString = (str: string) =>
   Buffer.from(str, "base64").toString("utf-8");
 
-const convertVmess = function (link: string): proxy {
+export const convertVmess = function (link: string): proxy {
   link = base64ToString(link);
   const jsonLink: vmessProxy = JSON.parse(link);
   const res: proxy = {
@@ -66,7 +66,7 @@ const convertVmess = function (link: string): proxy {
   return res;
 };
 
-const convertTrojan = function (link: string): proxy {
+export const convertTrojan = function (link: string): proxy {
   // format
   // trojan://passwd@host:port#description
 
@@ -131,7 +131,7 @@ export const convert = function (
  * Convert multiple proxy link to clash config
  * @param links Proxy link
  */
-const convertList = function (links: string[]): proxy[] {
+export const convertList = function (links: string[]): proxy[] {
   const res: proxy[] = [];
   links.forEach((v) => {
     const _res = convert(v);
