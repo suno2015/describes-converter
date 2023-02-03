@@ -148,7 +148,13 @@ export const concatTemplateAndSubscribes = function (
   template.proxies = convertedList;
   const names: string[] = [];
   convertedList.forEach((v) => names.push(v.name));
-  template["proxy-groups"][0]["proxies"] = names; // 这里默认了第一个组，以后要支持配置更多的代理组
+  for (const proxies of template["proxy-groups"]) {
+    // 深拷贝，若使用引用，则会在 stringify yaml 时产生奇怪的错误
+    for (const name of names) {
+      proxies.proxies.push(name);
+    }
+  }
+  template["proxy-groups"][0]["proxies"].unshift("AUTO");
   return template;
 };
 
@@ -174,7 +180,6 @@ export const concatStringTemplateAndSubscribes = function (
       );
     else {
       throw "Wrong proxy";
-      // return "";
     }
   }
 
